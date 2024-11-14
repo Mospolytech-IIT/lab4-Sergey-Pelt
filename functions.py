@@ -1,18 +1,18 @@
 """Функции с исключениями"""
 def division_ex(a, b):
-    """Функция деления, выбрасывает исключение при b == 0."""
+    """1. Функция деления, выбрасывает исключение при b == 0."""
     if b == 0:
         raise ZeroDivisionError("Деление на ноль невозможно.")
     return a / b
 
 def index_ex(lst, index):
-    """Функция доступа к элементу списка, выбрасывает исключение при некорректном индексе."""
+    """1. Функция доступа к элементу списка, выбрасывает исключение при некорректном индексе."""
     if index >= len(lst):
         raise IndexError("Индекс за пределами списка.")
     return lst[index]
 
 def safe_file_read(file_path):
-    """Функция чтения файлас обработчиком исключения при отсутствии файла."""
+    """2. Функция чтения файла с обработчиком исключения при отсутствии файла."""
     try:
         with open(file_path, 'r', encoding="utf-8") as f:
             return f.read()
@@ -21,7 +21,7 @@ def safe_file_read(file_path):
         return None
 
 def safe_division(a, b):
-    """Функция деления с обработчиком исключений общего типа и блоком finally."""
+    """3. Функция деления с обработчиком исключений общего типа и блоком finally."""
     try:
         result = a / b
         return result
@@ -32,7 +32,7 @@ def safe_division(a, b):
         print("Операция завершена.")
 
 def different_ex(value):
-    """Функция обработки данных, выбрасывает разные исключения при разных типах ошибок."""
+    """4. Функция обработки данных, выбрасывает разные исключения при разных типах ошибок."""
     try:
         if not isinstance(value, int):
             raise TypeError("Ожидался целочисленный тип.")
@@ -50,7 +50,7 @@ def different_ex(value):
         print("Операция завершена.")
 
 def different_ex_2(s):
-    """Функция обработки строки, выбрасывает исключения при пустой строке или длинной строке."""
+    """4. Функция обработки строки, выбрасывает исключения при пустой строке или длинной строке."""
     try:
         if len(s) == 0:
             raise ValueError("Строка не должна быть пустой.")
@@ -65,7 +65,7 @@ def different_ex_2(s):
         print("Обработка строки завершена.")
 
 def different_ex_3(lst):
-    """Функция деления элементов списка, выбрасывает исключения при нуле в списке."""
+    """4. Функция деления элементов списка, выбрасывает исключения при нуле в списке."""
     try:
         return [10 / x for x in lst]
     except ZeroDivisionError as e:
@@ -74,7 +74,7 @@ def different_ex_3(lst):
         print("Обработка списка завершена.")
 
 def generate_ex(value):
-    """Функция, генерирующая исключения на основе входных данных."""
+    """5. Функция, генерирующая исключения на основе входных данных."""
     try:
         if value < 0:
             raise ValueError("Число должно быть положительным.")
@@ -90,7 +90,7 @@ def generate_ex(value):
         print("Функция завершена.")
 
 class CustomError1(Exception):
-    """Пользовательское исключение 1"""
+    """6. Пользовательское исключение 1"""
     def __init__(self, value, message="Ошибка: значение меньше нуля"):
         self.value = value
         self.message = message
@@ -101,7 +101,7 @@ class CustomError1(Exception):
 
 
 class CustomError2(Exception):
-    """Пользовательское исключение 2"""
+    """6. Пользовательское исключение 2"""
     def __init__(self, value, message="Ошибка: значение равно нулю"):
         self.value = value
         self.message = message
@@ -112,10 +112,10 @@ class CustomError2(Exception):
 
 
 class CustomError3(Exception):
-    """Пользовательское исключение 3"""
+    """6. Пользовательское исключение 3"""
     def __init__(self, value, limit, message="Ошибка: значение больше допустимого"):
         self.value = value
-        self.limit = limit  # Лимит, который был превышен
+        self.limit = limit
         self.message = message
         super().__init__(self.message)
 
@@ -123,7 +123,7 @@ class CustomError3(Exception):
         return f"{self.message}. Введённое значение: {self.value}, лимит: {self.limit}"
 
 def check_value(value):
-    """Функция выбрасывает расширенные пользовательские исключения при определённых значениях."""
+    """7. Функция выбрасывает расширенные пользовательские исключения при определённых значениях."""
     try:
         if value < 0:
             raise CustomError1(value)
@@ -140,3 +140,15 @@ def check_value(value):
         print(f"Пользовательская ошибка 3: {e}")
     finally:
         print("Проверка значения завершена.")
+
+def all_ex():
+    """Функция, вызывающая все функции"""
+    print(division_ex(10, 1))
+    print(index_ex([1, 2, 3], 1))
+    print(safe_file_read("example.txt"))
+    print(safe_division(10, 0))
+    print(different_ex(-1))
+    print(different_ex_2("Hello"))
+    print(different_ex_3([10, 0, 5]))
+    print(generate_ex(-5))
+    print(check_value(150))
