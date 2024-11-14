@@ -1,2 +1,7 @@
+"""Main"""
+from functions import all_ex
 if __name__ == "__main__":
-    print("Hello, World!")
+    try:
+        all_ex()
+    except Exception as e:
+        print(f"Необработанное исключение: {e}")
